@@ -34,6 +34,10 @@ const RegisterModal = () => {
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
+      <h2 className="text-lg md:text-2xl text-white font-semibold z-[100] animate-pulse">
+        Since this is a demo app please do not use real passwords that you use
+        on the daily
+      </h2>
       <Input
         placeholder="Email"
         onChange={(e) => setEmail(e.target.value)}
@@ -74,16 +78,18 @@ const RegisterModal = () => {
   );
 
   return (
-    <Modal
-      disabled={isLoading}
-      isOpen={registerModal.isOpen}
-      title="Create an Account"
-      actionLabel="Register"
-      onClose={registerModal.onClose}
-      onSubmit={onSubmit}
-      body={bodyContent}
-      footer={footerContent}
-    />
+    <>
+      <Modal
+        disabled={isLoading}
+        isOpen={registerModal.isOpen}
+        title="Create an Account"
+        actionLabel="Register"
+        onClose={registerModal.onClose}
+        onSubmit={onSubmit}
+        body={bodyContent}
+        footer={footerContent}
+      />
+    </>
   );
 };
 
