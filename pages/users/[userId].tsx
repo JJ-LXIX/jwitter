@@ -2,8 +2,8 @@ import React from "react";
 
 type Props = {};
 
-const userView = (props: Props) => {
+const UserView = (props: Props) => {
   return <div>userView</div>;
 };
 
-export default userView;
+export default UserView;
