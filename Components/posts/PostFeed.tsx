@@ -1,0 +1,23 @@
+import React from "react";
+import usePosts from "../../hooks/usePosts";
+import PostItem from "./PostItem";
+
+type Props = {
+  userId?: string;
+};
+
+function PostFeed({ userId }: Props) {
+  const { data: posts = [] } = usePosts(userId);
+
+  console.log(posts);
+
+  return (
+    <>
+      {posts?.map((post: Record<string, any>) => (
+        <PostItem userId={userId} key={post.id} data={post} />
+      ))}
+    </>
+  );
+}
+
+export default PostFeed;
