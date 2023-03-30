@@ -9,8 +9,6 @@ type Props = {
 function PostFeed({ userId }: Props) {
   const { data: posts = [] } = usePosts(userId);
 
-  console.log(posts);
-
   return (
     <>
       {posts?.map((post: Record<string, any>) => (
