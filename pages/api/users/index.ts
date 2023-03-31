@@ -3,7 +3,7 @@ import prisma from "../../../libs/prismadb";
 
 export const config = {
   api: {
-    responseLimit: false,
+    responseLimit: "8mb",
   },
 };
 
