@@ -1,10 +1,11 @@
 import { formatDistanceToNowStrict } from "date-fns";
 import { useRouter } from "next/router";
 import React, { useCallback, useMemo } from "react";
-import { AiOutlineHeart, AiOutlineMessage } from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart, AiOutlineMessage } from "react-icons/ai";
 import useCurrentUser from "../../hooks/useCurrentUser";
 import useLoginModal from "../../hooks/useLoginModal";
 import Avatar from "../Avatar";
+import useLike from "../../hooks/useLike";
 
 type Props = {
   data: Record<string, any>;
@@ -16,6 +17,7 @@ function PostItem({ data, userId }: Props) {
   const loginModal = useLoginModal();
 
   const { data: currentUser } = useCurrentUser();
+  const { hasLiked, toggleLike } = useLike({ postId: data.id, userId });
 
   const goToUser = useCallback(
     (event: any) => {
@@ -32,15 +34,22 @@ function PostItem({ data, userId }: Props) {
   const onLike = useCallback(
     (e: any) => {
       e.stopPropagation();
-      loginModal.onOpen();
+
+      if (!currentUser) {
+        return loginModal.onOpen();
+      }
+
+      toggleLike();
     },
-    [loginModal]
+    [loginModal, currentUser, toggleLike]
   );
 
   const createdAt = useMemo(() => {
     if (!data.createdAt) return null;
     return formatDistanceToNowStrict(new Date(data.createdAt));
   }, [data?.createdAt]);
+
+  const LikedItem = hasLiked ? AiFillHeart : AiOutlineHeart;
 
   return (
     <div
@@ -75,8 +84,8 @@ function PostItem({ data, userId }: Props) {
               onClick={onLike}
               className="flex flex-row items-center text-neutral-500 gap-2 cursor-pointer transition hover:text-red-500"
             >
-              <AiOutlineHeart size={20} />
-              <p>{data.comments?.length || 0}</p>
+              <LikedItem size={20} color={hasLiked ? "red" : ""} />
+              <p>{data.likedIds.length}</p>
             </div>
           </div>
         </div>
