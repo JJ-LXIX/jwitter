@@ -35,10 +35,12 @@ function ImageUpload({ onChange, label, value, disabled }: Props) {
 
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
+    maxSize: Infinity,
     onDrop: handleDrop,
     disabled,
     accept: {
       "image/jpeg": [],
+      "image/jpg": [],
       "image/png": [],
     },
   });
@@ -56,7 +58,12 @@ function ImageUpload({ onChange, label, value, disabled }: Props) {
           <Image src={base64} height="100" width="100" alt="Uploaded image" />
         </div>
       ) : (
-        <p className="text-white">{label}</p>
+        <p className="text-white">
+          {label}{" "}
+          <span className="text-white/50 text-md">
+            (File max size 2MB - JPG,JPEG or PNG)
+          </span>
+        </p>
       )}
     </div>
   );
