@@ -5,6 +5,7 @@ import { ClipLoader } from "react-spinners";
 import Header from "../../Components/Header";
 import PostItem from "../../Components/posts/PostItem";
 import Form from "../../Components/Form";
+import CommentFeed from "../../Components/posts/CommentFeed";
 
 type Props = {};
 
@@ -30,6 +31,7 @@ function PostView({}: Props) {
         isComment
         placeholder="Tweet your reply"
       />
+      <CommentFeed comments={fetchedPost?.comments} />
     </>
   );
 }
