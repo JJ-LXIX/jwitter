@@ -17,7 +17,7 @@ const Sidebar = () => {
     },
     {
       label: "Notifications",
-      href: "/notifications",
+      href: "/",
       icon: BsBellFill,
       auth: true,
     },
