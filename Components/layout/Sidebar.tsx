@@ -15,12 +15,12 @@ const Sidebar = () => {
       href: "/",
       icon: BsHouseFill,
     },
-    {
-      label: "Notifications",
-      href: "/",
-      icon: BsBellFill,
-      auth: true,
-    },
+    // {
+    //   label: "Notifications",
+    //   href: "/",
+    //   icon: BsBellFill,
+    //   auth: true,
+    // },
     {
       label: "Profile",
       href: `/users/${currentUser?.id}`,
