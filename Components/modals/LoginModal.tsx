@@ -4,6 +4,8 @@ import useRegisterModal from "../../hooks/useRegisterModal";
 import Input from "../Input";
 import Modal from "../Modal";
 import { signIn } from "next-auth/react";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
@@ -12,6 +14,8 @@ const LoginModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const router = useRouter();
 
   const onToggle = useCallback(() => {
     if (isLoading) return;
@@ -25,10 +29,17 @@ const LoginModal = () => {
       await signIn("credentials", {
         email,
         password,
+        redirect: false,
+        // @ts-ignore
+      }).then(({ error, ok }) => {
+        if (ok) {
+          loginModal.onClose();
+        } else if (error) {
+          toast.error("Invalid credentials ,try again ");
+        }
       });
-      loginModal.onClose();
     } catch (error) {
-      console.log(error);
+      loginModal.onOpen();
     } finally {
       setIsLoading(false);
     }
