@@ -51,7 +51,7 @@ const Sidebar = () => {
             />
           )}
 
-          <SidebarTweetButton />
+          {currentUser ? null : <SidebarTweetButton />}
         </div>
       </div>
     </div>
